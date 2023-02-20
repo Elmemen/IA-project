@@ -13,43 +13,15 @@ from search import *
 # Problem class #
 #################
 class TowerSorting(Problem):
-    
-    def __init__(self, max_height, colors, initial_state=None):
-        self.max_height = max_height
-        self.colors = colors
-        self.initial_state = self.get_initial_state() if initial_state is None else initial_state
 
-    def get_initial_state(self):
-        towers = [[] for _ in range(len(self.colors))]
-        for i, color in enumerate(self.colors):
-            for j in range(0, len(color), self.max_height):
-                tower = color[j:j+self.max_height]
-                if tower:
-                    towers[i].append(tower)
-        return State(towers)
+    def actions(self, state):
+        pass
 
-    def is_goal_state(self, state):
-        for tower in state.towers:
-            if not tower:
-                continue
-            if len(tower) != self.max_height or len(set(tower)) != 1:
-                return False
-        return True
+    def result(self, state, action):
+        pass
 
-    def get_successors(self, state):
-        successors = []
-        for i, tower in enumerate(state.towers):
-            if not tower:
-                continue
-            for j, other_tower in enumerate(state.towers):
-                if i == j or len(other_tower) == self.max_height:
-                    continue
-                new_state = state.copy()
-                disk = new_state.towers[i][-1]
-                new_state.towers[i] = tower[:-1]
-                new_state.towers[j].append(tower[-1])
-                successors.append((j, State(new_state.towers), (i, j)))
-        return successors
+    def goal_test(self, state):
+        pass
 
 
 ###############
